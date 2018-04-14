@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>Lista 2</title>
+      <link rel="stylesheet" href="lista_2.css" />
+      <script src="lista_2.js"></script>
+      <script src="No.js"></script>
+      <script src="nos.js"></script>
+   </head>
+   <body>
+      <h1>Lista 2 - Estruturas de Dados Para Pesquisa e Ordenação</h1>
+      <p>Selecione a origem &nbsp&nbsp&nbsp Selecione o destino</p>
+      <select id=origem></select> 
+      <select id=destino></select>
+      <input type="button" value="Gera ligação" onclick="geraLigacao()">
+      <input type="button" value="Verifica menor caminho" onclick="calculoMenorCaminho()">
+      </br></br>
+      <form id="fadj" name="fadj">
+      <textarea id="txtadj" name="txtadj" cols="80" rows="4"></textarea>
+      <div></div>
+      <button id="btnRun" name="btnRun" >Atualiza</button>
+      </form>
+      <section id="grafo">
+      <canvas height="644" width="800" id="canvas"></canvas>
+      </section>      
+      <section>
+      <h2>Matriz de adjacência</h2>
+      <table id="adj"></table>
+      </section>
+      <section>
+      <h2>Grau dos nós</h2>
+      <table id="grau"></table>
+      </section>
+      <section>
+   </body>
+</html>

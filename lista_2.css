@@ -1,0 +1,52 @@
+html{
+  background-color: #CCC;
+}
+body {
+   padding: 20px;
+   background-color: #FFF;
+   width: 890px;
+   min-height: 1500px;
+   font-size: 12px;
+   font-family: Helvetica, Arial, sans-serif;
+   margin: auto;
+}
+td, th{
+   width: 1em;
+   border: 1px solid darkgray;
+   text-align: center;
+}
+section {
+   float: left;
+   display: block;
+   padding-right:1em;
+}
+section#grafo {
+   width: 100%;
+   float: none;
+   clear: both;
+}
+#grafo canvas {
+}
+footer {
+	padding-top: 50px;
+	clear: both;
+	text-align: center;
+}
+#error{
+	color: red;
+	clear: both;
+	font-family: Arial, sans-serif; 
+	text-align: right;
+}
+
+select
+{
+  border-left: #A0C0E7 1px solid; 
+	border-right: #A0C0E7 1px solid; 
+	border-top: #A0C0E7 1px solid;  
+	border-bottom: #A0C0E7 1px solid;
+	background-color: #E2EBF5;	
+	font-family:Segoe UI, Tahoma, Sans-Serif;
+	font-size:10pt;
+	color:#000000;	        	
+}
