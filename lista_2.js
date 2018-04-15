@@ -32,6 +32,8 @@ function atualizaGrafo(){
   montaMatrizAdjacencia();
   montaGrauNo();
   desenhaGrafo();
+  document.getElementById("retorno").innerHTML = "";
+  document.getElementById("retorno2").innerHTML = "";
 }
 
 function montaComboBox(){
@@ -55,6 +57,8 @@ function geraLigacao(){
   ta = ta+n;
   document.getElementById("txtadj").value = ta;
   atualizaGrafo();
+  document.getElementById("retorno").innerHTML = "";
+  document.getElementById("retorno2").innerHTML = "";
 }
 
 function montaMatrizAdjacencia(){
