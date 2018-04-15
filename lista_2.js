@@ -306,6 +306,7 @@ function dijkstra(origem, destino){
       var auxI = Infinity;
       var auxJ = Infinity;
       var auxK = 0;
+      montaMatrizAdjacencia();
       for (i = cont; i > 0 ; i--) {
         if (aux==""){
           aux = aux+nos[tmp[i-1]].cidade;
