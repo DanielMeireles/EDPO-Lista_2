@@ -172,9 +172,13 @@ function desenhaGrafo(){
         if(matrizAdjacencia[i][j]!="*"){
           ctx.strokeStyle = "black";
           ctx.lineWidth = 0.4;
+          ctx.fillStyle = "red";
+          ctx.font="12px arial"; 
         }else{
           ctx.strokeStyle = "red";
           ctx.lineWidth = 1;
+          ctx.fillStyle = "black"; 
+          ctx.font="bold 14px arial";
         }
         ctx.stroke();
         valorA = 0;
@@ -195,9 +199,9 @@ function desenhaGrafo(){
         valor = parseInt(Math.hypot(valorA, valorB));
         geraMatrizValorada(no.id, outra.id, valor);
         if(valor > 0){
-          ctx.font="12px arial";
+          
           ctx.textAlign="center";
-          ctx.fillStyle = "red"; 
+          
           ctx.fillText(valor,outra.x + (no.x-outra.x)/2,outra.y + (no.y-outra.y)/2);//Coloca o texto nas ligações
         }
       }
