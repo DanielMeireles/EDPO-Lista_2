@@ -273,7 +273,7 @@ function dijkstra(origem, destino){
   }while(v != destino && min != Infinity);
    //Resultado da busca
    if (min == Infinity) {
-     document.getElementById("retorno").innerHTML = ("Nao existe cidades que interligam a origem e destino selecionados!");
+     document.getElementById("retorno").innerHTML = ("Nao existe cidades que interligam a origem e destino selecionados");
    }
    else {
       i = destino;

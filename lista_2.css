@@ -27,20 +27,16 @@ section#grafo {
 }
 #grafo canvas {
 }
-footer {
-	padding-top: 50px;
-	clear: both;
-	text-align: center;
-}
-#error{
-	color: red;
+
+p, #retorno{
+  font-weight: bold;
+  color: black;
 	clear: both;
 	font-family: Arial, sans-serif; 
-	text-align: right;
+	text-align: left;
 }
 
-select
-{
+select{
   border-left: #A0C0E7 1px solid; 
 	border-right: #A0C0E7 1px solid; 
 	border-top: #A0C0E7 1px solid;  
