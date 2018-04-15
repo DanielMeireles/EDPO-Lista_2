@@ -224,7 +224,7 @@ function calculoMenorCaminho(){
   if(o!=d){
     dijkstra(o,d);
   }else{
-    alert("O ponto de destino é o mesmo que de origem");
+    document.getElementById("retorno").innerHTML = "O ponto de destino é o mesmo que de origem";
   }
 }
 
@@ -273,7 +273,7 @@ function dijkstra(origem, destino){
   }while(v != destino && min != Infinity);
    //Resultado da busca
    if (min == Infinity) {
-      alert("Nao existe cidades que interligam a origem e destino selecionados!");
+     document.getElementById("retorno").innerHTML = ("Nao existe cidades que interligam a origem e destino selecionados!");
    }
    else {
       i = destino;
@@ -285,17 +285,21 @@ function dijkstra(origem, destino){
          i = ant[i];
       }
       
-      var aux = "O percurso com menor custo é:\n";
+      var aux = "";
       var auxI = Infinity;
       var auxJ = Infinity;
+      var auxK = 0;
       for (i = cont; i > 0 ; i--) {
-        if (aux=="O percurso com menor custo é:\n"){
+        if (aux==""){
           aux = aux+nos[tmp[i-1]].cidade;
+          aux = aux+" (0)(0)";
         }else{
           aux = aux+" -> "+nos[tmp[i-1]].cidade;
         }        
         if(auxI != Infinity && auxJ == Infinity){
           auxJ = tmp[i-1];
+          auxK = auxK+matrizValorada[auxI][auxJ];
+          aux = aux+" ("+matrizValorada[auxI][auxJ]+")"+"("+auxK+")";
           matrizAdjacencia[auxI][auxJ]="*";
           matrizAdjacencia[auxJ][auxI]="*";
           auxI = auxJ;
@@ -305,7 +309,8 @@ function dijkstra(origem, destino){
           auxI=tmp[i-1];
         }        
       }
-      aux = aux+"\nCom custo total de: "+dist[destino];
-      alert(aux);
+      //alert(aux);
+      document.getElementById("retorno").innerHTML = "O percurso com menor custo é:";
+      document.getElementById("retorno2").innerHTML = aux;
    }
 }
