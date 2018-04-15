@@ -239,6 +239,7 @@ function calculoMenorCaminho(){
   if(o!=d){
     dijkstra(o,d);
   }else{
+    limpaRetorno();
     document.getElementById("retorno").innerHTML = "O ponto de destino é o mesmo que de origem";
   }
 }
@@ -288,6 +289,7 @@ function dijkstra(origem, destino){
   }while(v != destino && min != Infinity);
    //Resultado da busca
    if (min == Infinity) {
+    limpaRetorno();
      document.getElementById("retorno").innerHTML = ("Nao existe cidades que interligam a origem e destino selecionados");
    }
    else {
@@ -324,7 +326,7 @@ function dijkstra(origem, destino){
           auxI=tmp[i-1];
         }        
       }
-      //alert(aux);
+      limpaRetorno();
       document.getElementById("retorno").innerHTML = "O percurso com menor custo é:";
       document.getElementById("retorno2").innerHTML = aux;
    }
