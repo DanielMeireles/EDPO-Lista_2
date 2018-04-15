@@ -26,6 +26,7 @@ function atualizaGrafo(){
   montaGrauNo();
   desenhaGrafo();
   limpaRetorno();
+  geraNos();
 }
 
 function limpaRetorno(){
@@ -60,6 +61,7 @@ function geraLigacao(){
   document.getElementById("txtadj").value = ta;
   atualizaGrafo();
   limpaRetorno()
+  geraNos();
 }
 
 function montaMatrizAdjacencia(){
@@ -223,6 +225,9 @@ function desenhaGrafo(){
     ctx.save();
     ctx.translate(no.x, no.y);
     ctx.beginPath();
+    if(no.r>0.7){
+      ctx.strokeStyle = "red";
+    }
     ctx.arc(0, 0, no.r, 0, 2*Math.PI, false);
     ctx.lineWidth = 2;
     ctx.fill();
@@ -245,6 +250,7 @@ function calculoMenorCaminho(){
 }
 
 function dijkstra(origem, destino){
+  geraNos();
   var i, v, min, cont = 0;
   var custos = [];
   var z = [];
@@ -296,12 +302,12 @@ function dijkstra(origem, destino){
       i = destino;
       i = ant[i];
       tmp[cont++]=destino;
-      nos[destino].r = 2;
+      nos[destino].r = 2.5;
       while (i != -1) {
          tmp[cont] = i;
+         nos[tmp[cont]].r = 2.5;
          cont++;
          i = ant[i];
-         nos[i].r = 2;
       }
       var aux = "";
       var auxI = Infinity;
