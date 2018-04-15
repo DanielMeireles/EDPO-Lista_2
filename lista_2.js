@@ -296,12 +296,13 @@ function dijkstra(origem, destino){
       i = destino;
       i = ant[i];
       tmp[cont++]=destino;
+      nos[destino].r = 2;
       while (i != -1) {
          tmp[cont] = i;
          cont++;
          i = ant[i];
+         nos[i].r = 2;
       }
-      
       var aux = "";
       var auxI = Infinity;
       var auxJ = Infinity;
