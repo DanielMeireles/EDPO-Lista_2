@@ -1,29 +1,22 @@
-var img = new Image();
-img.src = 'mapa.jpg';
-
-window.addEventListener("load", init);
-
 var matrizAdjacencia = [];
 var matrizValorada = [];
 var grauNo = [];
 var nos = [];
 var canvas;
 var ctx;
+var img = new Image();
+img.src = 'mapa.jpg';
+
+window.addEventListener("load", init);
 
 function init(){
   document.getElementById("btnRun").addEventListener("click", atualizaGrafo);
+
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   geraNos();
   montaComboBox();
   atualizaGrafo();
-
-  /*canvas.addEventListener('click', function(event) {
-    var rect = canvas.getBoundingClientRect();
-    var x = event.clientX - rect.left;
-    var y = event.clientY - rect.top;
-    console.log("x: " + x + " y: " + y); 
-  }, false);*/
 }
 
 function atualizaGrafo(){
@@ -32,6 +25,10 @@ function atualizaGrafo(){
   montaMatrizAdjacencia();
   montaGrauNo();
   desenhaGrafo();
+  limpaRetorno();
+}
+
+function limpaRetorno(){
   document.getElementById("retorno").innerHTML = "";
   document.getElementById("retorno2").innerHTML = "";
 }
@@ -57,12 +54,17 @@ function geraLigacao(){
   ta = ta+n;
   document.getElementById("txtadj").value = ta;
   atualizaGrafo();
-  document.getElementById("retorno").innerHTML = "";
-  document.getElementById("retorno2").innerHTML = "";
+  limpaRetorno()
 }
 
 function montaMatrizAdjacencia(){
+  for(i=matrizAdjacencia.length;i>=0;i--){
+    matrizAdjacencia.splice(i, 1);
+  }
   var teste = "0-0;1-1;2-2;3-3;4-4;5-5;6-6;7-7;8-8;9-9;10-10;11-11;12-12;13-13;14-14;15-15;16-16;17-17;18-18;19-19;20-20;21-21;22-22;23-23;24-24;25-25;26-26";
+  if(document.fadj.txtadj.value !=""){
+    teste = teste + ";";
+  }
   var ligacoes = teste.concat(document.fadj.txtadj.value);
   ligacoes = ligacoes.split(";");
   for(var i in ligacoes){
@@ -144,7 +146,7 @@ function imprimeGrauNo(){
 }
 
 function geraMatrizValorada(o, d, v){
-  if(v ==0) v=-1;
+  if(v == 0) v=-1;
   matrizValorada[o][d]=v;
 }
 
