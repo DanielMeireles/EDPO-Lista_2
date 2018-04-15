@@ -22,11 +22,11 @@ function init(){
 function atualizaGrafo(){
   if(event.preventDefault) event.preventDefault();
   event.result = false;
+  geraNos();
   montaMatrizAdjacencia();
   montaGrauNo();
   desenhaGrafo();
-  limpaRetorno();
-  geraNos();
+  limpaRetorno();  
 }
 
 function limpaRetorno(){
@@ -59,9 +59,9 @@ function geraLigacao(){
   var ta = document.getElementById("txtadj").value;
   ta = ta+n;
   document.getElementById("txtadj").value = ta;
-  atualizaGrafo();
-  limpaRetorno()
   geraNos();
+  atualizaGrafo();
+  limpaRetorno();  
 }
 
 function montaMatrizAdjacencia(){
@@ -302,10 +302,10 @@ function dijkstra(origem, destino){
       i = destino;
       i = ant[i];
       tmp[cont++]=destino;
-      nos[destino].r = 2.5;
+      nos[destino].r = 2;
       while (i != -1) {
          tmp[cont] = i;
-         nos[tmp[cont]].r = 2.5;
+         nos[tmp[cont]].r = 2;
          cont++;
          i = ant[i];
       }
