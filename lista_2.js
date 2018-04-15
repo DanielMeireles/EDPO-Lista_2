@@ -207,7 +207,7 @@ function desenhaGrafo(){
         if(no.y < outra.y){
           valorB = outra.y - no.y;
         }
-        valor = parseInt(Math.hypot(valorA, valorB));
+        valor = parseInt(Math.hypot(valorA, valorB)*6.6);
         geraMatrizValorada(no.id, outra.id, valor);
         if(valor > 0){
           
