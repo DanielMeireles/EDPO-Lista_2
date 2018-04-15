@@ -49,7 +49,12 @@ function montaComboBox(){
 function geraLigacao(){
   var o = document.getElementById("origem").selectedIndex;
   var d = document.getElementById("destino").selectedIndex;
-  var n = ";"+o+"-"+d;
+  var n = "";
+  if(document.getElementById("txtadj").value == ""){
+    n = o+"-"+d;
+  }else{
+    n = ";"+o+"-"+d;
+  }  
   var ta = document.getElementById("txtadj").value;
   ta = ta+n;
   document.getElementById("txtadj").value = ta;
