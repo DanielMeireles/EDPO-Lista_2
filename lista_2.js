@@ -18,12 +18,12 @@ function init(){
   montaComboBox();
   atualizaGrafo();
 
-  canvas.addEventListener('click', function(event) {
+  /*canvas.addEventListener('click', function(event) {
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
     console.log("x: " + x + " y: " + y); 
-  }, false);
+  }, false);*/
 }
 
 function atualizaGrafo(){
@@ -165,12 +165,17 @@ function desenhaGrafo(){
     for(j=0;j<matrizAdjacencia.length;j++){
       if(matrizAdjacencia[i][j]){
         outra = nos[j];
-        ctx.lineWidth = 0.4;
         ctx.beginPath();
         ctx.moveTo(no.x, no.y);
         ctx.lineTo(outra.x, outra.y);
         ctx.closePath();
-        ctx.strokeStyle = "black";
+        if(matrizAdjacencia[i][j]!="*"){
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 0.4;
+        }else{
+          ctx.strokeStyle = "red";
+          ctx.lineWidth = 1;
+        }
         ctx.stroke();
         valorA = 0;
         valorB = 0;
@@ -273,17 +278,33 @@ function dijkstra(origem, destino){
    else {
       i = destino;
       i = ant[i];
+      tmp[cont++]=destino;
       while (i != -1) {
          tmp[cont] = i;
          cont++;
          i = ant[i];
       }
+      
       var aux = "O percurso com menor custo é:\n";
+      var auxI = Infinity;
+      var auxJ = Infinity;
       for (i = cont; i > 0 ; i--) {
-        //aux = aux+tmp[i-1]+" -> ";
-        aux = aux+nos[tmp[i-1]].cidade+" -> ";
+        if (aux=="O percurso com menor custo é:\n"){
+          aux = aux+nos[tmp[i-1]].cidade;
+        }else{
+          aux = aux+" -> "+nos[tmp[i-1]].cidade;
+        }        
+        if(auxI != Infinity && auxJ == Infinity){
+          auxJ = tmp[i-1];
+          matrizAdjacencia[auxI][auxJ]="*";
+          matrizAdjacencia[auxJ][auxI]="*";
+          auxI = auxJ;
+          auxJ = Infinity;
+          desenhaGrafo();
+        }else{
+          auxI=tmp[i-1];
+        }        
       }
-      aux = aux+nos[destino].cidade;
       aux = aux+"\nCom custo total de: "+dist[destino];
       alert(aux);
    }
