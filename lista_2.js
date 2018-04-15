@@ -14,7 +14,7 @@ function init(){
   document.getElementById("btnRun").addEventListener("click", atualizaGrafo);
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
-  geraNos(); 
+  geraNos();
   montaComboBox();
   atualizaGrafo();
 
@@ -37,7 +37,6 @@ function atualizaGrafo(){
 function montaComboBox(){
   var docfragOrigem = document.createDocumentFragment();
   var docfragDestino = document.createDocumentFragment();
-  console.log(nos.length);
   for (var i = 0; i < nos.length; i++) {
       docfragOrigem.appendChild(new Option(nos[i].cidade, i));
       docfragDestino.appendChild(new Option(nos[i].cidade, i));
@@ -141,6 +140,7 @@ function imprimeGrauNo(){
 }
 
 function geraMatrizValorada(o, d, v){
+  if(v ==0) v=-1;
   matrizValorada[o][d]=v;
 }
 
@@ -148,10 +148,10 @@ function limpaMatrizValorada(){
   for(i=matrizValorada.length;i>=0;i--){
     matrizValorada.splice(i, 1);
   }
-  for(i=0;i<27;i++){
+  for(i=0;i<nos.length;i++){
     matrizValorada[i]=[];
-    for(j=0;j<27;j++){
-        matrizValorada[i][j]=0;
+    for(j=0;j<nos.length;j++){
+        matrizValorada[i][j]=-1;
     }
   }
 }
@@ -198,7 +198,6 @@ function desenhaGrafo(){
       }
     }
   }
-  console.log(matrizValorada);
   for (var i = 0; i < nos.length; i++) {//Desenha os nos
     no = nos[i];
     ctx.save();
@@ -217,5 +216,75 @@ function desenhaGrafo(){
 function calculoMenorCaminho(){
   var o = document.getElementById("origem").selectedIndex;
   var d = document.getElementById("destino").selectedIndex;
-  console.log(o, d);
+  if(o!=d){
+    dijkstra(o,d);
+  }else{
+    alert("O ponto de destino é o mesmo que de origem");
+  }
+}
+
+function dijkstra(origem, destino){
+  var i, v, min, cont = 0;
+  var custos = [];
+  var z = [];
+  var dist = [];
+  var tmp = [];
+  var ant = [];
+  for (i = 0; i < nos.length; i++) {
+    if (matrizValorada[origem][i] != -1) {        
+      ant[i] = origem;
+      dist[i] = matrizValorada[origem][i];
+    }else{
+      ant[i]= -1;
+      dist[i] = Infinity;
+    }
+    z[i]=0;
+  }
+  z[origem] = 1;
+  dist[origem] = 0;  
+  do {
+    // Encontrando o vertice que deve entrar em z 
+    min = Infinity;
+    for (i=0;i<nos.length;i++){
+      if (!z[i]){
+        if (dist[i]>=0 && dist[i]<min) {
+          min=dist[i];
+          v=i;
+        }
+      }
+    }
+    //Calculando as distancias dos novos vizinhos de z
+    if (min != Infinity && v != destino ) {
+      z[v] = 1;
+      for (i = 0; i < nos.length; i++){
+        if (!z[i]) {
+          if (matrizValorada[v][i] != -1 && dist[v] + matrizValorada[v][i] < dist[i]) {
+            dist[i] = dist[v] + matrizValorada[v][i];
+            ant[i]=v;
+          }
+        }
+      }
+    }
+  }while(v != destino && min != Infinity);
+   //Resultado da busca
+   if (min == Infinity) {
+      alert("Nao existe cidades que interligam a origem e destino selecionados!");
+   }
+   else {
+      i = destino;
+      i = ant[i];
+      while (i != -1) {
+         tmp[cont] = i;
+         cont++;
+         i = ant[i];
+      }
+      var aux = "O percurso com menor custo é:\n";
+      for (i = cont; i > 0 ; i--) {
+        //aux = aux+tmp[i-1]+" -> ";
+        aux = aux+nos[tmp[i-1]].cidade+" -> ";
+      }
+      aux = aux+nos[destino].cidade;
+      aux = aux+"\nCom custo total de: "+dist[destino];
+      alert(aux);
+   }
 }
